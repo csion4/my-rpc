@@ -24,10 +24,6 @@ public class ClientDynamicProxy<T> implements InvocationHandler {
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-//        // 创建远程连接
-//        NettyClient nettyClient = new NettyClient("127.0.0.1", 8899);
-//        nettyClient.connect();
-
         if (Arrays.asList(aClass.getDeclaredMethods()).contains(method)) {
             // 封装请求格式
             RpcRequest request = createRequest(method, args);

@@ -30,7 +30,6 @@ public class RpcEncoder extends MessageToByteEncoder<Object> {
      */
     @Override
     protected void encode(ChannelHandlerContext channelHandlerContext, Object obj, ByteBuf byteBuf) throws Exception {
-        System.out.println("encode..." + obj);
         byte[] bytes = serializer.doSerializer(obj);
         byteBuf.writeInt(bytes.length); // 这里可用于拆包，可以使用LengthFieldBasedFrameDecoder
         byteBuf.writeBytes(bytes);

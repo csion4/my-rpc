@@ -30,7 +30,6 @@ public class RpcDecoder extends ByteToMessageDecoder {
      */
     @Override
     protected void decode(ChannelHandlerContext channelHandlerContext, ByteBuf byteBuf, List<Object> list) throws Exception {
-        System.out.println("decode.....");
         // 通过对byteBuf的一些列操作读出来拆包后的报文
         if (byteBuf.readableBytes() < 4) { // 这里校验长度，因为编码时写入了4字节的int，所以如果小于这个长度则说明数据为读取完成，可以直接跳过
             return;

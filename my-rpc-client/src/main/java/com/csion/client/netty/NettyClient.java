@@ -73,21 +73,6 @@ public class NettyClient {
         log.info("客户端获取channel...");
     }
 
-//    private ChannelFuture connect0(Bootstrap bootstrap) {
-//        try {
-//            return bootstrap.connect(properties.getServer(), properties.getPort()).addListener(future -> {
-//                if (future.isSuccess()) {
-//                    log.info("服务端连接成功");
-//                } else {
-//                    bootstrap.config().group().schedule(() -> connect0(bootstrap), 5, TimeUnit.SECONDS);
-//                    // log.error("服务端连接失败", future.cause()); // todo：这里可以增加失败重试机制
-//                }
-//            }).sync();      // 这里在启动时需要添加sync()来保证阻塞式的连接成功
-//        } catch (InterruptedException e) {
-//            throw new RuntimeException("服务端连接异常", e);
-//        }
-//    }
-
     /**
      * 发送信息
      * @param request
@@ -106,20 +91,10 @@ public class NettyClient {
     }
 
     /**
-     * todo：这里的关闭好用吗，在连接异常情况下如何关闭的？？
+     * 关闭
      */
     public void close() {
         worker.shutdownGracefully();
         channel.closeFuture().syncUninterruptibly();
     }
-
-//    public static void main(String[] args) {
-//        NettyClient c = new NettyClient(new RpcProperties());
-//        c.connect();
-//
-//        ITest test = NettyProxyFactory.create(ITest.class, c);
-//         String s = test.test1();
-//        System.out.println(test.toString());
-//
-//    }
 }

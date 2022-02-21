@@ -25,12 +25,8 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {   // 这里使
      */
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        System.out.println("客户端写入" + msg);
         if (msg instanceof RpcResponse){
             map.put(((RpcResponse) msg).getRequestId(), ((RpcResponse) msg));
-//            RpcResponse resp = (RpcResponse) msg;
-//            MyFuture future = map.get(resp.getRequestId());
-//            future.setResponse();
         }
         super.channelRead(ctx, msg);
     }
@@ -40,18 +36,14 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {   // 这里使
         // 压测发现，无锁轮询的方式对于客户端在大并发场景下会超级占用cpu，所以可以换成通知机制await/notify()
         // 无锁轮询
         do {
-            // System.out.println(Thread.currentThread().getName() + "************");
             resp = map.remove(requestId);
-            try {
-                System.out.println(Thread.currentThread().getName() + "************");
-                Thread.sleep(10);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+//            try {
+//                System.out.println(Thread.currentThread().getName() + "************");
+//                Thread.sleep(10);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
         } while (resp == null);
-
-        // 将数据从map中移除
-        // map.remove(requestId);
 
         return resp;
     }

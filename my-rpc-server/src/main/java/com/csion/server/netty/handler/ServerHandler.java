@@ -30,7 +30,6 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
      */
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        System.out.println(msg);
         if (msg instanceof RpcRequest){
             RpcResponse rpcResponse = new RpcResponse();
             RpcRequest req = (RpcRequest) msg;
@@ -44,7 +43,6 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
                 log.error("rpc接口调用异常", throwable);
             }
             ctx.writeAndFlush(rpcResponse);
-            System.out.println("写出完成" + rpcResponse);
         }
     }
 
