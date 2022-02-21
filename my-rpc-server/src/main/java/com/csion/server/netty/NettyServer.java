@@ -47,7 +47,7 @@ public class NettyServer {
         ServerBootstrap bootstrap = new ServerBootstrap();
         bootstrap.group(bossGroup, workerGroup)
                 .channel(NioServerSocketChannel.class)  // 注意：与client端不同这个使用NioServerSocketChannel，client端使用NioSocketChannel
-                .option(ChannelOption.SO_BACKLOG, 1024) // 服务端的SO_BACKLOG可以加大一点，默认128
+                .option(ChannelOption.SO_BACKLOG, rpcProperties.getSo_backlog()) // 服务端的SO_BACKLOG可以加大一点，默认128
 //                .option(ChannelOption.TCP_NODELAY, true)
                 .childHandler(new ChannelInitializer<SocketChannel>() { // 注意：与client端不同这个使用childHandler因为只需要指定workerGroup中线程的处理
 

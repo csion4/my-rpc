@@ -41,9 +41,9 @@ public class NettyClient {
         Bootstrap bootstrap = new Bootstrap();
         bootstrap.group(worker)
                 .channel(NioSocketChannel.class)
-                .option(ChannelOption.SO_KEEPALIVE, true)   // 设置socket参数SO_KEEPALIVE用于主动探测连接活性，默认探测间隔2h
-                .option(ChannelOption.TCP_NODELAY, true)    // 设置为true禁止Nagle算法，使得不会合并数据帧发送，减少发送延迟
-                .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 5000) // Netty参数，连接超时毫秒数，默认值30000毫秒即30秒。
+                .option(ChannelOption.SO_KEEPALIVE, properties.getSo_keepalive())   // 设置socket参数SO_KEEPALIVE用于主动探测连接活性，默认探测间隔2h
+                .option(ChannelOption.TCP_NODELAY, properties.getTcp_nodelay())    // 设置为true禁止Nagle算法，使得不会合并数据帧发送，减少发送延迟
+                .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, properties.getConnect_timeout_millis()) // Netty参数，连接超时毫秒数，默认值30000毫秒即30秒。
                 .handler(new ChannelInitializer<SocketChannel>() {
                     @Override
                     protected void initChannel(SocketChannel sc) throws Exception {
