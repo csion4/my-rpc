@@ -14,31 +14,30 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ClientBeanConfiguration {
 
-    /**
-     * 加载客户端启动配置
-     * @return
-     */
-    @Bean(name = "clientRpcProperties")
-    @ConfigurationProperties(prefix ="myrpc.client")
-    public RpcProperties loadRpcProperties(){
-        return new RpcProperties();
-    }
+//    /**
+//     * 加载客户端启动配置，貌似行不通
+//     * @return
+//     */
+//    @Bean(name = "clientRpcProperties")
+//    @ConfigurationProperties(prefix ="myrpc.client")
+//    public RpcProperties loadRpcProperties(){
+//        return new RpcProperties();
+//    }
 
-    /**
-     * 加载客户端nettyClient
-     * @param clientRpcProperties
-     * @return
-     */
-    @Bean(initMethod = "connect", destroyMethod = "close")
-    public NettyClient loadNettyClient(RpcProperties clientRpcProperties) {
-        return new NettyClient(clientRpcProperties);
-    }
+//    /**
+//     * 加载客户端nettyClient
+//     * @return
+//     */
+//    @Bean(initMethod = "connect", destroyMethod = "close")
+//    public NettyClient loadNettyClient() {
+//        return new NettyClient();
+//    }
 
     /**
      * 加载代理server
      * @return
      */
-    @Bean
+    @Bean(destroyMethod = "close")
     public AutoRegisterClientServers  autoRegisterClientServers() {
         return new AutoRegisterClientServers();
     }
