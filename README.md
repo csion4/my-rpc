@@ -2,6 +2,7 @@
 
 ## 简介
 这是一个简单的基于Netty实现的RPC框架，让我们可以摒弃当前市面上高度封装的RPC框架复杂的源码而回归RCP本身；网络搜索RPC会出现成千上万条关于RPC的讲解，但是任何文字的解读都没有代码语言来的直接，跨越语言的翻译是达不到本质的，试问哪国的语言可以翻译出“大江东去浪淘尽,千古风流人物”的宏伟与壮美呢？
+
 SpringBootStarter则是该RPC Demo对SpringBoot的集成，和mybatis-spring-boot-starter是一样的，也可以通过本项目简单的SpringBootStarter来理解mybatis-spring-boot-starter；
 
 ## SpringBoot项目使用
