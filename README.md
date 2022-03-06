@@ -16,7 +16,7 @@ SpringBootStarter则是该RPC Demo对SpringBoot的集成，和mybatis-spring-boo
     myrpc:
       server:
         port: 8101  # rpc服务端端口
-        so_backlog: 1024    # netty连接配置，没人128
+        so_backlog: 1024    # netty连接配置，默认128
 ### 3，客户端引入依赖包
     <!-- 客户端引入my-rpc依赖       -->
     <dependency>
